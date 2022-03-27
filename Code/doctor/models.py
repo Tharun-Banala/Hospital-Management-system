@@ -12,3 +12,5 @@ class Doctor(models.Model):
     Salary = models.IntegerField
     Shift = models.IntegerField
     BloodGroup = models.CharField(max_length=45)
+    department = models.CharField(max_length=45)
+    status = models.CharField(max_length=45) 
