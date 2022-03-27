@@ -1,0 +1,69 @@
+{% extends "patient/template.html" %}
+{% block title %}
+    <title>All Patient Details</title>
+{% endblock title %}
+{% block style %}
+    <style>
+        table,
+        th,
+        td {
+        border: 1px solid black;
+        }
+        .viewDetailsbutton {
+            background: none !important;
+            border: none;
+            padding: 0 !important;
+            font-family: arial, sans-serif;
+            color: #069;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+{% endblock style %}
+
+{% block content %}
+    <h2>Search Patient</h2>
+    <div class="searchPatientsForm">
+      <form method="post">
+          {% csrf_token %}
+        <input type="int" id="patientId" name="patientId" placeholder="PatientId" />
+        <input type="submit" value="search" />
+        <input type="text" id="patientName" name="patientName" placeholder="Patient Name" />
+        <input type="submit" value="search" />
+      </form>
+    </div>
+
+    <br />
+    <h2>All Registered Patients</h2>
+    <table style="width: 100%">
+      <tr>
+        <th style="width: 5%">PatientId</th>
+        <th style="width: 10%">First Name</th>
+        <th style="width: 10%">Last Name</th>
+        <th style="width: 5%">Age</th>
+        <th style="width: 5%">Blood Group</th>
+        <th style="width: 20%">Email Address</th>
+        <th style="width: 30%">Address</th>
+        <th style="width: 15%"></th>
+      </tr>
+      {% for patient in patients %}
+      <tr align="center">
+        <td>{{patient.PatientID}}</td>
+        <td>{{patient.FirstName}}</td>
+        <td>{{patient.LastName}}</td>
+        <td>{{patient.Age}}</td>
+        <td>{{patient.BloodGroup}}</td>
+        <td>{{patient.EmailAddress}}</td>
+        <td>{{patient.PermantAddress}}</td>
+        <td>
+          <form action="/receptionist/patientDetails/"  method="post">
+            {% csrf_token %}
+            <button id="patientID" class="viewDetailsbutton" name="patientId" value={{patient.PatientID}}>
+              View Details
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+{% endblock content %}

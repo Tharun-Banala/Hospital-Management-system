@@ -1,0 +1,47 @@
+{% extends "patient/template.html" %}
+{% block title %}
+    <title>Patient Medical Data</title>
+{% endblock title %}
+{% block style %}
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+
+    .viewDetailsbutton {
+      background: none !important;
+      border: none;
+      padding: 0 !important;
+      font-family: arial, sans-serif;
+      color: #069;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+{% endblock style %}
+{% block content %}
+
+    <h2>Appointments</h2>
+    <table style="width: 100%">
+      <tr><!-- fetch these (appointments) in the following order  -->
+        <th style="width: 5%">Appointment Id</th>
+        <th style="width: 10%">Doctor</th>
+        <th style="width: 10%">Department</th>
+        <th style="width: 5%">Assigned by</th>
+
+      </tr>
+      {% for appointment in appointments %}
+      <tr align="center">
+        <td>{{appointment.AppointmentID}}</td> <!--App Id-->
+        <td>{{appointment.Doctor.FirstName}}</td> <!--Doctor  -->
+        <td>{{appointment.Doctor.Department}}</td> <!-- Doc Department -->
+        <td>{{appointment.Receptionist.FirstName }}</td> <!-- Receptionist Name -->
+        <td>{{appointment.VisitNo}}</td> <!-- Visit Number -->
+        <td>{{appointment.datetime}}</td> <!-- Date-Time -->
+      </tr>
+      {% endfor %}
+    </table>
+
+{% endblock content %}

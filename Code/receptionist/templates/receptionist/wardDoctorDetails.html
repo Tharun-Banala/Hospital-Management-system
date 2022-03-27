@@ -1,0 +1,87 @@
+{% extends "patient/template.html" %}
+{% block title %}
+    <title>Document</title>
+{% endblock title %}
+
+{% block content %}
+<div> Information of wards</div>
+    <table>
+        <tr>
+          <th>Ward No.</th>
+          <th>Ward type</th>
+          <th>Total occupancies</th>
+          <th>Available</th>
+          <th>Ward Assistant</th>
+          <th>Contact</th>
+        </tr>
+        {% for eachward in Ward %}
+            <tr>
+                <td>eachward.WardNov</td>
+                <td>eachward.WardType</td>
+                <td>eachward.Population</td>
+                <td>eachward.WardCapacity-Ward[i].Population</td>
+                <td>eachward.WardClerk.FirstName</td>
+                <td>eachward.WardClerk.contact</td>
+                <td><button type="button" onclick="hideshow('Wardid')">View Details</button></td>
+            </tr>
+            <tr>
+                <table id="Wardid" style="display: None">
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Patient Name</th>
+                        <th>Age</th>
+                        <th>Admitted on</th>
+                        <th>Contact</th>
+                    </tr>
+                    
+                    {% for bed in WardDetails %}
+                        {% if bed.Ward.WardNo == eachward.WardNo %}
+                            <tr>
+                                <td>bed.Patient.PatientID</td>
+                                <td>bed.Patient.FirstName</td>
+                                <td>bed.Patient.Age</td>
+                                <td>bed.JoinedDate</td>
+                                <td>bed.Ward.WardClerk.contact</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+    
+                </table>
+            </tr>
+        {% endfor %}
+      </table>
+      <hr>
+
+      <div> Information of Doctors</div>
+      
+      <table>
+        <tr>
+            <th>Doctor ID</th>
+            <th>Name</th>
+            <th>Speciality</th>
+            <th>Status</th>
+            <th>Contact</th>
+        </tr>
+
+        {% for doctor in DoctorDetails %}
+            <tr>
+                <td>{{doctor.DoctorID}}</td>
+                <td>{{doctor.FirstName}}</td>
+                <td>{{doctor.Department}}</td>
+                <td>{{doctor.status}}</td>
+                <td>{{doctor.contact}}</td>
+            </tr>
+        {% endfor %}
+
+      </table>
+      <script>
+
+        function hideshow(tableid)
+        {
+            if (document.getElementById(tableid).style.display == "none")
+            document.getElementById(tableid).style.display="block";
+            else
+            document.getElementById(tableid).style.display="none";
+        }
+    </script>
+{% endblock content %}

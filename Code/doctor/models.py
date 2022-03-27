@@ -1,4 +1,5 @@
 from curses import def_prog_mode
+from pickle import NONE
 from django.db import models
 
 # Create your models here.
@@ -13,5 +14,6 @@ class Doctor(models.Model):
     Salary = models.IntegerField
     Shift = models.IntegerField
     BloodGroup = models.CharField(max_length=45)
-    department = models.CharField(max_length=45,default=None)
+    Department = models.CharField(max_length=45,default=None)
     status = models.CharField(max_length=45,default=None) 
+    contact = models.CharField(max_length=15,default=None)

@@ -11,15 +11,17 @@ class WardClerk(models.Model):
     Salary = models.IntegerField
     Shift = models.IntegerField
     BloodGroup = models.CharField(max_length=45)
+    contact = models.CharField(max_length=13,default=None)
 
 class Ward(models.Model):
     WardNo = models.IntegerField(primary_key=True)
+    WardType = models.CharField(max_length=45,default="usual")
     WardClerk = models.ForeignKey(WardClerk,default=None,on_delete=models.CASCADE)
     WardCapacity=models.IntegerField()
     Population = models.IntegerField()  
 
 class WardDetails(models.Model):
-    WardNo = models.ForeignKey(Ward,default=None,on_delete=models.CASCADE)
+    Ward = models.ForeignKey(Ward,default=None,on_delete=models.CASCADE)
     BedNo= models.IntegerField()
     Patient= models.ForeignKey(Patient,default=None,on_delete=models.CASCADE)
     Appointment = models.ForeignKey(DoctorPatientAssignment,default=None,on_delete=models.CASCADE)
