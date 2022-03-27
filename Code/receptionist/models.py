@@ -22,8 +22,8 @@ class DoctorPatientAssignment(models.Model):
     Receptionist = models.ForeignKey(Receptionist,default=None,on_delete=models.CASCADE)
     AppointmentID = models.IntegerField(default=None)
     VisitNo = models.IntegerField(default=None)
-    datetime = models.DateTimeField()
-    
+    datetime = models.DateTimeField(default=None)
+
     
 
 

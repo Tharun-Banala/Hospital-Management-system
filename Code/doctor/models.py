@@ -1,3 +1,4 @@
+from curses import def_prog_mode
 from django.db import models
 
 # Create your models here.
@@ -12,5 +13,5 @@ class Doctor(models.Model):
     Salary = models.IntegerField
     Shift = models.IntegerField
     BloodGroup = models.CharField(max_length=45)
-    department = models.CharField(max_length=45)
-    status = models.CharField(max_length=45) 
+    department = models.CharField(max_length=45,default=None)
+    status = models.CharField(max_length=45,default=None) 
